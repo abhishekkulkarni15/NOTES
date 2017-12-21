@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NOTES</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="main.js"></script>
+</head>
+<body onload="initializeApplication()">
+	<nav class="navbar navbar-inverse" style="border-radius:0px;">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index.html">NOTES</a>
+			</div>
+			<form class="navbar-form navbar-left">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" name="search" style="border-radius:0px;">
+					<div class="input-group-btn">
+						<button class="btn btn-default" onclick="searchNotes()" style="border-radius:0px;">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</nav>
+	<div class="row">
+		<div class="col col-sm-2">
+			<div class="btn-group-vertical">
+				<button type="button" class="btn btn-link" onclick="getAllNotes()" style="border-radius:0px;">Notes</button>
+				<button type="button" class="btn btn-link" onclick="getAllReminders()" style="border-radius:0px;">Reminder</button>
+				<hr/>
+				<div align="center">Labels</div>
+				<div id="labels">
+				</div>
+				<br/>
+				<button type="button" class="btn btn-link btn-info" data-toggle="modal" data-target="#myLabelModal" style="border-radius:0px;">New label</button>
+				<!-- Modal -->
+				<div id="myLabelModal" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Add Label</h4>
+							</div>
+							<div class="modal-body">
+								<form>
+									<input type="text" id="newLabelName">
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal" onclick="createNewLabel()">Add</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr/>
+				<button type="button" class="btn btn-link" onclick="getAllArchivedItems()" style="border-radius:0px;">Archive</button>
+				<hr/>
+				<button type="button" class="btn btn-link" onclick="getAllTrashItems()" style="border-radius:0px;">Trash</button>
+				<hr/>
+			</div>
+		</div>
+		<div class="col col-sm-10" id="items">
+			<div class="row">
+				<!--Add Note-->
+				<div align="center" id="new">
+					<input type="text" id="itemTitle" placeholder="Quick Add">
+					<button type="button" class="btn btn-link" onclick="addNote('quick')" style="border-radius:0px;">Quick Add</button>
+					<button type="button" class="btn btn-link btn-info" data-toggle="modal" onclick="loadDropDownLabels()" data-target="#myItemModal" style="border-radius:0px;">Add Description</button>
+					<!-- Modal -->
+					<div id="myItemModal" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Add</h4>
+								</div>
+								<div class="modal-body">
+									<form>
+										<div class="form-group">
+											<label for="itemTitleFull">Title<br>
+												<textarea type="text" style="width:100%;" id="itemTitleFull" placeholder="Title"></textarea>
+											</label>
+										</div>
+										<div class="form-group">
+											<label for="itemDescription">Description<br>
+												<textarea id="itemDescription" placeholder="Description"></textarea>
+											</label>
+										</div>
+										<div class="form-group">
+											<select id="itemDropDown">
+											</select>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal" onclick="addNote('full')">Add</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Displaying all notes-->
+				<div class="containter" id="notes">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
